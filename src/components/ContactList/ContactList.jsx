@@ -1,4 +1,4 @@
-import cl from '../ContactForm/ContactForm.module.css'
+import cl from '../ContactList/ContactList.module.css'
 import { getFilter } from 'redux/selectors';
 import { useSelector } from 'react-redux';
 
@@ -17,19 +17,19 @@ const ContactList = ({ contacts, onDelete, deleting }) => {
 
   return (
     <div>
-      <ul>
+      <ul className={cl.contactList}>
         {filteredContacts.map((contact) => (
-          <li key={contact.id}>
-            {contact.name}: <br />
-            {contact.phone}
+          <li key={contact.id} className={cl.contactItem}>
+            <span className={cl.contactName}>{contact.name}:</span> <br />
+            <span className={cl.contactPhone}>{contact.phone}</span>
             <button
-              className={cl.text__Button}
+              className={`${cl.text__Button} ${cl.deleteButton}`}
               onClick={() => onDelete(contact.id)}
+              disabled={deleting}
             >
               {deleting ? 'Deleting...' : 'Delete'}
             </button>
           </li>
-          
         ))}
       </ul>
     </div>

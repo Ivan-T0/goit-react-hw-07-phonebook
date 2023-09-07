@@ -24,10 +24,11 @@ const ContactForm = () => {
 };
 
   return (
-    <div >
+    <div>
       <form onSubmit={handleSubmit}>
-        <label >Name</label>
+        <label className={cl.label}>Name</label>
         <input
+          className={cl.input}
           type="text"
           name="name"
           pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
@@ -35,8 +36,9 @@ const ContactForm = () => {
           required
         />
 
-        <label >Number</label>
+        <label className={cl.label}>Number</label>
         <input
+          className={cl.input}
           type="tel"
           name="number"
           pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
@@ -44,9 +46,8 @@ const ContactForm = () => {
           required
         />
 
-        <button disabled={isDeleting} className={cl.text__Button} type="submit">
-          {isDeleting && 'Loading...'}
-          Add Contact
+        <button disabled={isDeleting} className={cl.button} type="submit">
+          {isDeleting ? 'Loading...' : 'Add Contact'}
         </button>
       </form>
     </div>
