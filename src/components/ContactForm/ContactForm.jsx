@@ -11,11 +11,11 @@ const ContactForm = () => {
   const handleSubmit = async (e) => {
   e.preventDefault();
   const name = e.currentTarget.elements.name.value;
-  const number = e.currentTarget.elements.number.value;
+  const phone = e.currentTarget.elements.phone.value;
 
   e.currentTarget.reset();
   try {
-    await newContact({ name,  number });
+    await newContact({ name,  phone });
     
    
   } catch (error) {
@@ -40,7 +40,7 @@ const ContactForm = () => {
         <input
           className={cl.input}
           type="tel"
-          name="number"
+          name="phone"
           pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
           title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
           required

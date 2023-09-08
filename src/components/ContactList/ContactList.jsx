@@ -1,14 +1,18 @@
 import cl from '../ContactList/ContactList.module.css'
 import { getFilter } from 'redux/selectors';
 import { useSelector } from 'react-redux';
+import { useDeleteContactMutation } from '../../redux/servises/contactsApi'
+import { useGetContactByNameQuery } from '../../redux/servises/contactsApi'
 
-const ContactList = ({ contacts, onDelete, deleting }) => {
+const ContactList = () => {
   const filter = useSelector(getFilter);
+  const [deleteContact, { isLoading }] = useDeleteContactMutation()
+  const { data  } = useGetContactByNameQuery()
 
   const getFilteredContacts = () => {
     const normalizedFilter = filter.toLowerCase();
 
-    return contacts.filter((contact) =>
+    return data.filter((contact) =>
       contact.name.toLowerCase().includes(normalizedFilter)
     );
   };
@@ -24,10 +28,10 @@ const ContactList = ({ contacts, onDelete, deleting }) => {
             <span className={cl.contactPhone}>{contact.phone}</span>
             <button
               className={`${cl.text__Button} ${cl.deleteButton}`}
-              onClick={() => onDelete(contact.id)}
-              disabled={deleting}
+              onClick={() => deleteContact(contact.id)}
+              disabled={isLoading}
             >
-              {deleting ? 'Deleting...' : 'Delete'}
+              {isLoading ? 'Deleting...' : 'Delete'}
             </button>
           </li>
         ))}
